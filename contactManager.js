@@ -30,7 +30,11 @@ const addContact = function (name, email, phone) {
   writeContacts(new_contacts);
 };
 
-const deleteContact = function (email) {};
+const deleteContact = function (email) {
+  const contacts = loadContacts();
+  let new_contacts = contacts.filter((c) => c.email !== email);
+  writeContacts(new_contacts);
+};
 
 const searchContact = function (name) {};
 
