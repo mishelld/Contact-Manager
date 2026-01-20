@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-
-const CONTACTS_FILE = path.join(__dirname, "contacts.json");
+const file_name = "contacts.json";
+const CONTACTS_FILE = path.join(__dirname, file_name);
 
 const loadContacts = function () {
   try {
@@ -15,7 +15,7 @@ const loadContacts = function () {
       console.log("File not found - creating new contact list");
     } else {
       console.log(
-        "Failed to parse contacts.json - creating new contact list",
+        `Failed to parse ${file_name} - creating new contact list`,
         error.message,
       );
     }
@@ -33,14 +33,27 @@ const writeContacts = function (new_contacts) {
 };
 const addContact = function (name, email, phone) {
   const contacts = loadContacts();
+  const contactToAdd = contacts.find((c) => c.email === email);
+  if (contactToAdd) {
+    console.log("✗ Error: Contact with this email already exists");
+    return;
+  }
   let contact = { name: name, email: email, phone: phone };
+  console.log(`✓ Contact added: ${name}`);
   let new_contacts = [...contacts, contact];
   writeContacts(new_contacts);
+  console.log("✓ Contacts saved to", file_name);
 };
 
 const deleteContact = function (email) {
   const contacts = loadContacts();
+  const contactToDelete = contacts.find((c) => c.email === email);
+  if (!contactToDelete) {
+    console.log("✗ Error: No contact found with email: ", email);
+    return;
+  }
   let new_contacts = contacts.filter((c) => c.email !== email);
+  console.log("✓ Contact deleted:", contactToDelete.name);
   writeContacts(new_contacts);
 };
 
