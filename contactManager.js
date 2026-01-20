@@ -42,7 +42,10 @@ const searchContact = function (name) {
   return new_contacts;
 };
 
-const listContact = function () {};
+const listContact = function () {
+  const contacts = loadContacts();
+  return contacts;
+};
 
 module.exports = {
   addContact,
