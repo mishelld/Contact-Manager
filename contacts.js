@@ -2,8 +2,8 @@ const manager = require("./contactManager");
 const ui = require("./ui");
 
 const command = process.argv[2]; // what operation to do
-
 const args = process.argv.slice(3);
+
 const run = function () {
   ui.checkArg(command, args.length);
   if (command === "add") {
