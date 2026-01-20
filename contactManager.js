@@ -5,12 +5,20 @@ const CONTACTS_FILE = path.join(__dirname, "contacts.json");
 
 const loadContacts = function () {
   try {
+    console.log("Loading contacts from contacts.json...");
     const data = fs.readFileSync(CONTACTS_FILE, "utf-8"); //"utf-8": bytes -> char
     const contacts = JSON.parse(data); // string -> object
-    console.log("JSON file Loaded");
+    console.log(`✓ Loaded ${contacts.length} contacts`);
     return contacts;
   } catch (error) {
-    console.log("Failed to load file contacts");
+    if (error.code === "ENOENT") {
+      console.log("File not found - creating new contact list");
+    } else {
+      console.log(
+        "Failed to parse contacts.json - creating new contact list",
+        error.message,
+      );
+    }
     return [];
   }
 };
