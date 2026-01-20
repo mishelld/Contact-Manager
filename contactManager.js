@@ -36,7 +36,11 @@ const deleteContact = function (email) {
   writeContacts(new_contacts);
 };
 
-const searchContact = function (name) {};
+const searchContact = function (name) {
+  const contacts = loadContacts();
+  let new_contacts = contacts.filter((c) => c.name === name);
+  return new_contacts;
+};
 
 const listContact = function () {};
 
