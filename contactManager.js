@@ -14,7 +14,15 @@ const loadContacts = function () {
     return [];
   }
 };
-
+const writeContacts = function (new_contacts) {
+  try {
+    const jsonString = JSON.stringify(new_contacts);
+    fs.writeFileSync(CONTACTS_FILE, jsonString, "utf-8");
+    console.log("Contacts saved successfully");
+  } catch (error) {
+    console.log("Failed to write file contacts");
+  }
+};
 const addContact = function (name, email, phone) {};
 
 const deleteContact = function (email) {};
