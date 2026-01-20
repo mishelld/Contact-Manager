@@ -23,7 +23,12 @@ const writeContacts = function (new_contacts) {
     console.log("Failed to write file contacts");
   }
 };
-const addContact = function (name, email, phone) {};
+const addContact = function (name, email, phone) {
+  const contacts = loadContacts();
+  let contact = { name: name, email: email, phone: phone };
+  let new_contacts = [...contacts, contact];
+  writeContacts(new_contacts);
+};
 
 const deleteContact = function (email) {};
 
@@ -32,7 +37,6 @@ const searchContact = function (name) {};
 const listContact = function () {};
 
 module.exports = {
-  loadContacts,
   addContact,
   deleteContact,
   searchContact,
